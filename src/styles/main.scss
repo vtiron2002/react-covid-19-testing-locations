@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+
+$red: rgb(255, 30, 0);
+$boxShadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.leaflet-container {
+  height: 100vh;
+}
+
+.loading {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 99999999;
+
+  .lds-dual-ring {
+    $size: 100px;
+    display: flex;
+    width: $size;
+    height: $size;
+    background: white;
+    border: 2px solid $red;
+    border-radius: 8px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 100%;
+    margin: 8px;
+    border-radius: 50%;
+    border: 10px solid;
+    border-color: $red transparent $red transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.LocationInfoBox {
+  position: fixed;
+  background: white;
+  width: calc(100% - 2rem);
+  z-index: 99999;
+  bottom: 0;
+  transform: translateY(150%);
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: $boxShadow;
+  border-radius: 8px;
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  font-size: clamp(0.5rem, 3vw, 1rem);
+
+  h3,
+  p,
+  ul {
+    margin-bottom: 1rem;
+    max-width: 100%;
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      opacity: 0.4;
+      font-size: 1.3rem;
+      transition: 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  button {
+    background: $red;
+    color: white;
+    padding: 0.5rem 1rem;
+    color: 1rem;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: darken($red, 20%);
+    }
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  &.active {
+    transform: translateY(0);
+  }
+}
+
+form.searchBox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  z-index: 9999;
+  background: white;
+  margin: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $boxShadow;
+
+  @media (max-width: 365px) {
+    top: 4rem;
+    width: calc(100% - 2rem);
+  }
+
+  input {
+    flex: 1;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    padding: 1rem;
+  }
+
+  > div {
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: #ccc;
+    }
+  }
+}
